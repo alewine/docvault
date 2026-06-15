@@ -1,0 +1,14 @@
+{
+  "name": "docvault",
+  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
+  "scripts": {
+    "build": "npm --workspace frontend run build",
+    "lint": "npm --workspace frontend run lint",
+    "test": "npm --workspace frontend run test",
+    "test:coverage": "npm --workspace frontend run test:coverage",
+    "test:watch": "npm --workspace frontend run test:watch"
+  }
+}

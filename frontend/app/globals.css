@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --vault-text-bright: #e2e5ec;
+  --vault-text-muted: #8b92a5;
+  --vault-text-dim: #555d72;
+  --vault-btn-border: #2e3340;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.badge-pdf {
+  background: rgb(229, 83, 62);
+  color: #fff;
+}
+.badge-img {
+  background: rgb(139, 94, 255);
+  color: #fff;
+}
+.badge-txt {
+  background: rgb(138, 147, 168);
+  color: #fff;
+}
+.badge-csv {
+  background: rgb(0, 212, 170);
+  color: #1c1f26;
+}
+.badge-docx {
+  background: rgb(56, 130, 246);
+  color: #fff;
+}
+.badge-xlsx {
+  background: rgb(52, 199, 89);
+  color: #fff;
+}
+.badge-pptx {
+  background: rgb(255, 159, 10);
+  color: #fff;
+}
+.badge-audio {
+  background: rgb(236, 72, 153);
+  color: #fff;
+}

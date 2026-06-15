@@ -1,0 +1,7 @@
+# Minimal ruff config for the DocVault backend.
+# Line length matches the existing Black-style formatting; import sorting on.
+line-length = 88
+
+[lint]
+# Default rules (E4/E7/E9, F) plus isort import ordering.
+extend-select = ["I"]

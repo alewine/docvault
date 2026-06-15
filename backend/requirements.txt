@@ -1,0 +1,22 @@
+fastapi
+uvicorn[standard]
+httpx
+sqlite-vec
+python-multipart
+pdf2image
+pytesseract
+pillow
+pillow-heif
+pdfplumber  # native text/table extraction from PDFs with embedded text layers
+python-dotenv
+opencv-python-headless
+numpy
+pikepdf
+python-docx  # .docx text extraction
+openpyxl     # .xlsx text extraction
+python-pptx  # .pptx text extraction and thumbnail generation
+python-dateutil  # date string parsing for document_date extraction
+pytest
+pytest-asyncio
+pytest-cov
+ruff  # linter + import sorter (config in ruff.toml)

@@ -96,9 +96,10 @@ echo "Starting backend..."
 cd "$SCRIPT_DIR/backend"
 source .venv/bin/activate
 
-# Bind to the Mac's Tailscale IP so the backend is reachable only over the
-# tailnet — not on the local LAN or the open internet.
-uvicorn main:app --host 100.82.222.43 --port 8777 --log-level debug \
+# Bind to 0.0.0.0 so the backend is reachable both on localhost (the local
+# frontend resolves to window.location.hostname → localhost/127.0.0.1) and on
+# the Tailscale interface for remote access over the tailnet.
+uvicorn main:app --host 0.0.0.0 --port 8777 --log-level debug \
   >/tmp/docvault-backend.log 2>&1 &
 BACKEND_PID=$!
 echo "$BACKEND_PID" >/tmp/docvault-backend.pid

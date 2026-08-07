@@ -120,7 +120,10 @@ for i in $(seq 1 15); do
 done
 
 # ── 4. Frontend (Next.js) ─────────────────────────────────────────────────────
-kill_stale_docvault 3000
+# The frontend runs on 3777 (see `next dev -p 3777` in frontend/package.json),
+# which is cleaned up below. Nothing of ours has used 3000 for a long time, and
+# sweeping it here would kill an unrelated app that does — sellmate runs there.
+kill_stale_docvault 3777
 echo "Starting frontend..."
 cd "$SCRIPT_DIR/frontend"
 

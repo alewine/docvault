@@ -120,12 +120,20 @@ app.add_middleware(
     # Explicit allowlist of known origins (no wildcards). Local dev + each
     # device on the tailnet by its stable Tailscale IP. When a new device is
     # added to the tailnet, add its Tailscale IP:3777 origin here.
+    #
+    # The .home names are served by Caddy on the home LAN, on port 80. The
+    # frontend still calls this backend directly on 8777 rather than through
+    # that proxy (see frontend/app/lib/backend.ts), so a page loaded from
+    # http://docvault.home is making a cross-origin request here and needs its
+    # origin listed — port 80 and port 8777 are different origins.
     allow_origins=[
         "http://localhost:3777",       # local dev frontend
         "http://127.0.0.1:3777",       # local dev frontend
         "http://100.82.222.43:3777",   # mac-mini frontend (Tailscale)
         "http://100.81.181.8:3777",    # iphone-15 (Tailscale)
         "http://100.81.181.8",         # iphone-15 direct access (no port)
+        "http://docvault.home",        # home LAN, via Caddy
+        "http://docvault",             # home LAN, bare name (no search domain)
     ],
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],

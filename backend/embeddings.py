@@ -17,9 +17,8 @@ import sqlite3
 
 import httpx
 
-from config import OLLAMA_URL, EMBED_MODEL
-from db import log_event, _vec_conn, delete_document_vectors
-
+from config import EMBED_MODEL, OLLAMA_URL
+from db import _vec_conn, delete_document_vectors, log_event
 
 _MAX_WORD_CHARS = 80   # longer "words" are OCR artifacts; truncate them
 _MAX_CHUNK_CHARS = 2000  # ~600 tokens at 3 chars/token, safely under nomic-embed-text's 2048-token limit

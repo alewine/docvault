@@ -5,3 +5,8 @@ line-length = 88
 [lint]
 # Default rules (E4/E7/E9, F) plus isort import ordering.
 extend-select = ["I"]
+
+[lint.per-file-ignores]
+# main.py re-exports names from the split-out modules; the test suite reaches
+# them as main.<name> (and monkeypatches some), so they look unused to ruff.
+"main.py" = ["F401"]

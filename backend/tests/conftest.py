@@ -30,11 +30,11 @@ def mock_vec_store():
 @pytest.fixture()
 def isolated_app(db_path, nas_dir, monkeypatch):
     """FastAPI TestClient with isolated SQLite and mocked NAS."""
-    import main
     import db
-    import storage
     import jobs
+    import main
     import routers.admin
+    import storage
 
     monkeypatch.setattr(main, "DB_PATH", db_path)
     monkeypatch.setattr(main, "DB_DIR", db_path.parent)
@@ -79,10 +79,10 @@ def isolated_app(db_path, nas_dir, monkeypatch):
 @pytest.fixture()
 def seeded_db(db_path, nas_dir, monkeypatch):
     """Run real DB migrations into a temp SQLite; yield an open connection."""
-    import main
     import db
-    import storage
     import jobs
+    import main
+    import storage
 
     monkeypatch.setattr(main, "DB_PATH", db_path)
     monkeypatch.setattr(main, "DB_DIR", db_path.parent)

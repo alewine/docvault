@@ -14,33 +14,36 @@ from fastapi.middleware.cors import CORSMiddleware
 # NAS_PATH / DB_DIR / DB_PATH are referenced only via setattr in conftest, so
 # they must exist on main even though nothing here reads them.
 from config import (
-    NAS_PATH,
+    AUTO_CLEANUP_INTERVAL_SECONDS,
     DB_DIR,
     DB_PATH,
-    AUTO_CLEANUP_INTERVAL_SECONDS,
+    NAS_PATH,
     logger,
 )
-
 from db import (
-    init_db,
-    _reset_stuck_processing_jobs,
+    _get_auto_cleanup_enabled,
+    _maybe_migrate_categories,
+    _maybe_migrate_email_fields,
     _maybe_migrate_summary,
     _maybe_migrate_title_column,
-    _maybe_migrate_email_fields,
-    _maybe_migrate_categories,
     _maybe_seed_allowed_senders,
+    _reset_stuck_processing_jobs,
+    init_db,
     log_event,
-    _get_auto_cleanup_enabled,
 )
 
-from storage import init_nas
-
+# Email ingestion lives in email_ingest.py (named to avoid shadowing the stdlib
+# `email` package). lifespan starts email_poller_loop() by bare name; tests reach
+# _extract_email_addr as main._extract_email_addr.
+from email_ingest import (
+    _extract_email_addr,
+    email_poller_loop,
+)
 from embeddings import (
-    chunk_text,
-    _MAX_WORD_CHARS,
     _MAX_CHUNK_CHARS,
+    _MAX_WORD_CHARS,
+    chunk_text,
 )
-
 from enrichment import (
     _sanitize_category,
     _title_fallback,
@@ -51,34 +54,26 @@ from enrichment import (
 # worker_loop / watchdog_loop / auto_cleanup_loop / _vec_integrity_check by bare
 # name; tests reach process_job / log_job_event / _run_auto_cleanup_sync as main.X.
 from jobs import (
-    log_job_event,
-    _vec_integrity_check,
     _run_auto_cleanup_sync,
+    _vec_integrity_check,
     auto_cleanup_loop,
-    worker_loop,
-    watchdog_loop,
+    log_job_event,
     process_job,
+    watchdog_loop,
+    worker_loop,
 )
-
-# Email ingestion lives in email_ingest.py (named to avoid shadowing the stdlib
-# `email` package). lifespan starts email_poller_loop() by bare name; tests reach
-# _extract_email_addr as main._extract_email_addr.
-from email_ingest import (
-    email_poller_loop,
-    _extract_email_addr,
-)
-
-from routers.email import router as email_router
-from routers.jobs import router as jobs_router
 from routers.admin import router as admin_router
-from routers.settings import router as settings_router
 from routers.audit import router as audit_router
 from routers.documents import router as documents_router
-from routers.search import router as search_router
+from routers.email import router as email_router
+from routers.jobs import router as jobs_router
 
 # _sanitize_fts now lives in routers.search; re-exported so the pure-function
 # tests can reach it as main._sanitize_fts.
 from routers.search import _sanitize_fts
+from routers.search import router as search_router
+from routers.settings import router as settings_router
+from storage import init_nas
 
 
 @asynccontextmanager

@@ -133,8 +133,8 @@ def test_maybe_migrate_categories_noop_when_already_seeded(seeded_db):
 
 
 def test_maybe_seed_allowed_senders_reads_env(db_path, nas_dir, monkeypatch):
-    import main
     import db
+    import main
 
     monkeypatch.setattr(main, "DB_PATH", db_path)
     monkeypatch.setattr(main, "DB_DIR", db_path.parent)
@@ -180,8 +180,8 @@ def test_maybe_seed_allowed_senders_skips_when_row_exists(seeded_db, monkeypatch
 
 
 def test_maybe_seed_allowed_senders_noop_when_env_empty(seeded_db, monkeypatch):
-    import main
     import db
+    import main
 
     monkeypatch.setattr(db, "ALLOWED_SENDERS_ENV", "")
     main._maybe_seed_allowed_senders(seeded_db)

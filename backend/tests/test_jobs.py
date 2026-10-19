@@ -10,8 +10,8 @@ import pytest
 
 
 def test_vec_integrity_check_requeues_missing(seeded_db, monkeypatch):
-    import jobs
     import embeddings
+    import jobs
 
     # Pretend Ollama embeddings are healthy so the check proceeds.
     monkeypatch.setattr(embeddings, "_check_embedding_quality", lambda: (True, 0.0))
@@ -48,7 +48,6 @@ def test_vec_integrity_check_requeues_missing(seeded_db, monkeypatch):
 def test_worker_loop_dispatches_one_job(seeded_db, monkeypatch):
     import jobs
 
-    db_path = jobs.DB_PATH
     doc_id = str(uuid.uuid4())
     job_id = str(uuid.uuid4())
     seeded_db.execute(

@@ -12,9 +12,12 @@ for backwards compatibility with the existing test suite.
 import os
 from pathlib import Path
 
-from config import NAS_PATH, DB_PATH, logger
-from db import delete_document_vectors, connection
-
+from config import (  # noqa: F401 -- tests monkeypatch storage.DB_PATH
+    DB_PATH,
+    NAS_PATH,
+    logger,
+)
+from db import connection, delete_document_vectors
 
 # ---------------------------------------------------------------------------
 # Path construction

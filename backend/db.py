@@ -14,9 +14,9 @@ from pathlib import Path
 from typing import Iterator
 
 from config import (
-    DB_PATH,
-    DB_DIR,
     ALLOWED_SENDERS_ENV,
+    DB_DIR,
+    DB_PATH,
 )
 
 

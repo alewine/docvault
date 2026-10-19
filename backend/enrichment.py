@@ -24,13 +24,13 @@ from pathlib import Path
 import httpx
 
 from config import (
-    OLLAMA_URL,
-    LLM_MODEL,
-    DB_PATH,
-    VALID_CATEGORIES,
     ALLOWED_CATEGORIES,
+    DB_PATH,  # noqa: F401 -- tests monkeypatch enrichment.DB_PATH
+    LLM_MODEL,
+    OLLAMA_URL,
+    VALID_CATEGORIES,
 )
-from db import log_event, connection
+from db import connection, log_event
 
 
 def _sanitize_category(raw: str, valid_set: set[str] | None = None) -> str:
@@ -269,8 +269,6 @@ def auto_categorize(doc_id: str, extracted_text: str, conn: sqlite3.Connection) 
             log_event(conn, doc_id, "auto_categorize", status="skipped",
                       message=f"Category already set: {existing[0]}")
             return
-
-        category_list = sorted(ALLOWED_CATEGORIES)
 
         text_sample = extracted_text[:4000]
         prompt = (

@@ -42,8 +42,8 @@ def _make_thumb(nas_dir, doc_id, _ext, _text=None):
 
 
 def test_process_job_txt_completes(seeded_db, nas_dir, monkeypatch):
-    import main
     import jobs
+    import main
 
     db_path = main.DB_PATH
     job_id, doc_id = _setup_job(db_path, nas_dir, ".txt")
@@ -103,8 +103,8 @@ def test_process_job_txt_completes(seeded_db, nas_dir, monkeypatch):
 
 
 def test_process_job_audio_skips_ocr(seeded_db, nas_dir, monkeypatch):
-    import main
     import jobs
+    import main
 
     db_path = main.DB_PATH
     job_id, doc_id = _setup_job(db_path, nas_dir, ".mp3")

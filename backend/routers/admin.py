@@ -25,8 +25,8 @@ from fastapi import APIRouter, BackgroundTasks
 
 import config
 import db
-import storage
 import embeddings
+import storage
 
 router = APIRouter(tags=["admin"])
 

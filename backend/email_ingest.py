@@ -25,22 +25,20 @@ import uuid
 from pathlib import Path
 
 from config import (
-    DB_PATH,
-    NAS_PATH,
     EMAIL_ADDRESS,
-    EMAIL_PASSWORD,
-    EMAIL_POLL_INTERVAL_SECONDS,
-    IMAP_HOST,
-    IMAP_PORT,
-    EMAIL_PROCESSED_FOLDER,
-    EMAIL_REJECTED_FOLDER,
     EMAIL_INLINE_IMAGE_MIN_BYTES,
     EMAIL_INLINE_IMAGE_MIN_DIM,
+    EMAIL_PASSWORD,
+    EMAIL_POLL_INTERVAL_SECONDS,
+    EMAIL_PROCESSED_FOLDER,
+    EMAIL_REJECTED_FOLDER,
+    IMAP_HOST,
+    IMAP_PORT,
+    NAS_PATH,
     SUPPORTED_EXTENSIONS,
     _executor,
 )
-
-from db import log_event, connection
+from db import connection, log_event
 
 
 def _extract_email_addr(header: str) -> str:

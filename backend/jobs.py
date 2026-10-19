@@ -23,27 +23,20 @@ from pathlib import Path
 import httpx
 
 from config import (
-    DB_PATH,
-    NAS_PATH,
-    OLLAMA_URL,
-    LLM_MODEL,
     AUDIO_EXTENSIONS,
-    TEXT_BASED_EXTENSIONS,
-    IMAGE_EXTENSIONS,
     AUTO_CLEANUP_INTERVAL_SECONDS,
     AUTO_CLEANUP_STARTUP_DELAY_SECONDS,
-    logger,
+    DB_PATH,  # noqa: F401 -- tests monkeypatch jobs.DB_PATH
+    IMAGE_EXTENSIONS,
+    LLM_MODEL,
+    NAS_PATH,
+    OLLAMA_URL,
+    TEXT_BASED_EXTENSIONS,
     _executor,
+    logger,
 )
-
-from db import log_event, _get_auto_cleanup_enabled, connection
-
-from extraction import ocr_file
-
-from storage import generate_thumbnail, generate_text_preview_thumbnail
-
-from embeddings import embed_document, _check_embedding_quality
-
+from db import _get_auto_cleanup_enabled, connection, log_event
+from embeddings import _check_embedding_quality, embed_document
 from enrichment import (
     _title_fallback,
     auto_categorize,
@@ -52,6 +45,8 @@ from enrichment import (
     detect_json_category,
     extract_json_date,
 )
+from extraction import ocr_file
+from storage import generate_text_preview_thumbnail, generate_thumbnail
 
 
 def log_job_event(conn: sqlite3.Connection, job_id: str, event: str) -> None:
